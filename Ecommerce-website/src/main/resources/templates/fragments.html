@@ -1,0 +1,62 @@
+<div th:fragment="status(enabled, titleTrue, titleFalse)">
+	<span th:if="${enabled == true}" class="badge rounded-pill bg-success">[[${titleTrue}]]</span>
+	<span th:unless="${enabled == true}" class="badge bg-danger">[[${titleFalse}]]</span>
+</div>
+
+<div th:fragment="edit(entityName, editURL)" th:remove="tag">
+	<a th:href="@{${editURL}}" th:title="'Edit this ' + ${entityName}"><i class="bi bi-pen"></i></a>
+</div>
+
+<th th:fragment="column_link(fieldName, columnLabel, moduleURL)">
+	<a class="text-secondary"
+		th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName}  +'&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">
+		[[${columnLabel}]]
+		<span th:if="${sortField == fieldName}"
+			th:class="${sortDir == 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'}"></span>
+	</a>
+</th>
+
+<div th:fragment="delete(entityName, entityId, deleteURL)" th:remove="tag">
+	<a th:href="@{${deleteURL}}" class="link-delete" th:entityId="${entityId}" data-bs-toggle="modal" data-bs-target="#exampleModal"
+		th:title="'Delete this ' + ${entityName}"><i class="bi bi-trash"></i></a>
+</div>
+
+<a th:fragment="page_link(pageNum, label, moduleURL)" class="page-link"
+	th:href="@{${moduleURL} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${label}]]</a>
+
+
+<div th:fragment="pagination(entityName, moduleURL)" th:remove="tag">
+	<div class="text-center m-1" th:if="${totalItems > 0}">
+		<span>Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+	</div>
+
+	<div class="text-center m-1" th:unless="${totalItems > 0}">
+		<span>No [[${entityName}]] found</span>
+	</div>
+
+	<div th:if="${totalPages > 1}">
+		<nav>
+			<ul class="pagination justify-content-center">
+				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					<a th:replace="fragments :: page_link(1, 'First', ${moduleURL})"></a>
+				</li>
+				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					<a th:replace="fragments :: page_link(${currentPage - 1}, 'Previous', ${moduleURL})"></a>
+				</li>
+
+				<li th:class="${currentPage != i ? 'page-item': 'page-item active'}"
+					th:each="i : ${#numbers.sequence(1, totalPages)}">
+					<a th:replace="fragments :: page_link(${i}, ${i}, ${moduleURL})"></a>
+				</li>
+
+				<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+					<a th:replace="fragments :: page_link(${currentPage + 1}, 'Next', ${moduleURL})"></a>
+				</li>
+
+				<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+					<a th:replace="fragments :: page_link(${totalPages}, 'Last', ${moduleURL})"></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

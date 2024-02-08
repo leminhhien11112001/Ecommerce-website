@@ -1,0 +1,9 @@
+package com.shopapp.admin.user;
+
+import com.shopapp.entity.Admin;
+import com.shopapp.entity.User;
+import com.shopapp.paging.SearchRepository;
+
+public interface UserRepository extends SearchRepository<Admin, ID>{
+
+}

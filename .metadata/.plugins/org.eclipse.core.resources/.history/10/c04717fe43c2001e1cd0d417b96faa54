@@ -1,0 +1,14 @@
+package com.shopapp.entity;
+
+import jakarta.persistence.Column;
+
+public class Customer extends User{
+	@Column(name = "phone_number", nullable = false, length = 15)
+	private  String phoneNumber;
+	
+	@Column(name = "phone_number", nullable = false, length = 15)
+	private  String phoneNumber;
+	
+	@Column(name = "phone_number", nullable = false, length = 15)
+	private  String phoneNumber;
+}

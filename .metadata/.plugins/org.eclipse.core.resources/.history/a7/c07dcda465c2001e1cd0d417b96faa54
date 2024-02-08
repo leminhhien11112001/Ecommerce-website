@@ -1,0 +1,14 @@
+package com.shopapp.admin.user;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+
+import com.shopapp.entity.Admin;
+import com.shopapp.paging.SearchRepository;
+
+public interface UserRepository extends SearchRepository<Admin, Integer> {
+	
+	@Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ', u.firstName, ' '," + " u.lastName) LIKE %?1%")
+	public Page<Admin> findAll(String keyword, Pageable page);
+}

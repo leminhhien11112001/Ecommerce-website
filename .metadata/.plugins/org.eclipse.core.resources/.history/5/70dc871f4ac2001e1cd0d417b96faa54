@@ -1,0 +1,29 @@
+package com.shopapp.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public class User extends IdBasedEntity{
+	@Column(length = 128, nullable = false, unique = true)
+	private String email;
+
+	@Column(length = 64, nullable = false)
+	private String password;
+
+	@Column(name = "first_name", length = 45, nullable = false)
+	private String firstName;
+
+	@Column(name = "last_name", length = 45, nullable = false)
+	private String lastName;
+
+	@Column(length = 64)
+	private String photos;
+
+	private boolean enabled;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
+}

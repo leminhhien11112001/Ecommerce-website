@@ -1,0 +1,10 @@
+package com.shopapp.admin.user;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.Getter;
+
+@RequestMapping("")
+public class TestController {
+
+}

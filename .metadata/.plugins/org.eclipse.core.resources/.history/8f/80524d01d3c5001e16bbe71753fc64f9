@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="base_fragments :: page_head"></div>
+
+<body>
+	<div th:replace="base_fragments :: header"></div>
+
+	<div th:replace="base_fragments :: slidebar"></div>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Manage User</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item active">Users</li>
+				</ol>
+			</nav>
+		</div>
+
+		<button type="button" class="btn btn-outline-success">Create User</button>
+
+		<section class="section dashboard mt-3">
+			<div class="row">
+
+				<div class="col-lg-12">
+					<div class="row">
+						<!-- Top Selling -->
+						<div class="col-12">
+							<div class="card top-selling overflow-auto">
+
+								<div class="card-body pb-0">
+
+									<table class="table table-borderless mt-4">
+										<thead>
+											<tr>
+												<th th:replace="fragments :: column_link('id', 'ID', '/users')"></th>
+												<th class="text-secondary">Image</th>
+												<th th:replace="fragments :: column_link('email', 'Email', '/users')">
+												</th>
+												<th
+													th:replace="fragments :: column_link('firstName', 'First Name', '/users')">
+												</th>
+												<th
+													th:replace="fragments :: column_link('lastName', 'Last Name', '/users')">
+												</th>
+												<th th:replace="fragments :: column_link('role', 'Role', '/users')">
+												</th>
+												<th
+													th:replace="fragments :: column_link('enabled', 'Enabled', '/users')">
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="user : ${listUsers}">
+												<td>[[${user.id}]]</td>
+												<td>
+													<img th:src="@{/assets/img/profile-img.jpg}" alt="Profile"
+														class="rounded-circle">
+												</td>
+												<td>[[${user.email}]]</td>
+												<td>[[${user.firstName}]]</td>
+												<td>[[${user.lastName}]]</td>
+												<td>[[${user.role}]]</td>
+												<td>
+													<div
+														th:replace="fragments :: status(${user.enabled}, 'Đang làm việc', 'Đã nghỉ việc')">
+													</div>
+												</td>
+												<td style="font-size: 25px;">
+													<div
+														th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})" />
+
+													<div
+														th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id})" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<div th:replace="fragments :: pagination('users', '/users')"></div>
+
+	</main>
+
+	<div th:replace="modal_fragments :: confirm_modal" />
+
+	<div th:replace="base_fragments :: footer"></div>
+
+	<div th:replace="base_fragments :: vendor_js"></div>
+
+	<script type="text/javascript">
+		moduleURL = "[[@{/users}]]";
+		
+	</script>
+</body>
+
+</html>

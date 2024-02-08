@@ -1,0 +1,12 @@
+package com.shopapp.entity;
+
+@Entity
+@Table(name = "admin")
+public class Admin extends User {
+
+	
+	
+
+	
+
+}

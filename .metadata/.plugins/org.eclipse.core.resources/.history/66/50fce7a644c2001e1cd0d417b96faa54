@@ -1,0 +1,24 @@
+package com.shopapp.entity;
+
+import jakarta.persistence.Column;
+
+public class Customer extends User {
+	@Column(name = "phone_number", nullable = false, length = 15)
+	private String phoneNumber;
+
+	@Column(name = "house_number", nullable = false, length = 64)
+	private String houseNumber;
+	
+	@Column(name = "street", nullable = false, length = 64)
+	private String street;
+	
+	@Column(name = "ward", nullable = false, length = 64)
+	private String ward;
+	
+	@Column(name = "district", nullable = false, length = 64)
+	private String district;
+	
+
+	@Column(name = "city", nullable = false, length = 64)
+	private String city;
+}

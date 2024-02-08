@@ -1,0 +1,5 @@
+package com.shopapp.entity;
+
+public class Customer extends User{
+	
+}
